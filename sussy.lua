@@ -70,6 +70,11 @@ callbacks.Register("Draw", function()
     gui.SetValue("esp.other.noscopedirt", true)
 
     local localplayer = entities.GetLocalPlayer()
+
+    if localplayer == nil then
+        return
+    end
+
     local is_scoped = localplayer:GetPropBool("m_bIsScoped")
     local factor = 0
 
@@ -106,6 +111,8 @@ callbacks.Register("Draw", function()
 
     client.SetConVar("r_drawvgui", 0, true);
 
+    gui.SetValue("esp.other.crosshair.clr", r, g, b, a * alpha)
+
     if is_scoped then
 
         if alternative_scope:GetValue() and alternative_hashtag:GetValue() then
@@ -137,9 +144,7 @@ callbacks.Register("Draw", function()
         --right--
         draw_GradientRect(center_x + 10 + (150 * (1.0 - alpha)), center_y,  150 - (150 * (1.0 - alpha)), 1, 1, {0, 0 ,0, 0}, {r, g, b, a * alpha})
 
-        else 
-
-        gui.SetValue("esp.other.crosshair.clr", r, g, b, a * alpha)
+        else
         draw.Color(r, g, b, a * alpha)
         --top left--
         draw.Line(center_x - 5, center_y - 5, center_x - 5 - (105 * alpha), center_y - 5 - (105 * alpha))
