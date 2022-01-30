@@ -1,5 +1,5 @@
 
-ref = gui.Reference("Visuals","Overlay", "Weapon");
+ref = gui.Reference("Visuals","Other", "Extra");
 
 custom_scope = gui.Checkbox(ref, "custom_scope", "Custom Scope", false)
 custom_scope_color = gui.ColorPicker(ref, "custom_scope_color", "Scope Color", 255, 255, 255, 255)
@@ -65,9 +65,9 @@ callbacks.Register("Draw", function()
         return 
     end
 
-    gui.SetValue('esp.other.noscope', true)
-    gui.SetValue('esp.other.noscopeoverlay', false)
-    gui.SetValue('esp.other.noscopedirt', true)
+    gui.SetValue("esp.other.noscope", true)
+    gui.SetValue("esp.other.noscopeoverlay", false)
+    gui.SetValue("esp.other.noscopedirt", true)
 
     local localplayer = entities.GetLocalPlayer()
     local is_scoped = localplayer:GetPropBool("m_bIsScoped")
@@ -138,8 +138,10 @@ callbacks.Register("Draw", function()
         draw_GradientRect(center_x + 10 + (150 * (1.0 - alpha)), center_y,  150 - (150 * (1.0 - alpha)), 1, 1, {0, 0 ,0, 0}, {r, g, b, a * alpha})
 
         else 
-        --top left--
+
+        gui.SetValue("esp.other.crosshair.clr", r, g, b, a * alpha)
         draw.Color(r, g, b, a * alpha)
+        --top left--
         draw.Line(center_x - 5, center_y - 5, center_x - 5 - (105 * alpha), center_y - 5 - (105 * alpha))
         draw.Line(center_x - 4, center_y - 5, center_x - 4 - (105 * alpha), center_y - 5 - (105 * alpha))
 
